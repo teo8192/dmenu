@@ -39,7 +39,7 @@ struct item {
 static char text[BUFSIZ] = "";
 static char *embed;
 static int bh, mw, mh;
-static int inputw = 0, promptw, passwd = 0;
+static int inputw = 0, promptw, passwd = 0, first_time = 1;
 static int lrpad; /* sum of left and right padding */
 static size_t cursor;
 static struct item *items = NULL;
@@ -297,11 +297,13 @@ fuzzymatch(void)
 	}
 	curr = sel = matches;
 
-	if (instant && matches && matches==matchend) {
+	if (instant && matches && matches==matchend && (only_first_time ? first_time : 1)) {
 		puts(matches->text);
 		cleanup();
 		exit(0);
 	}
+
+	first_time = 0;
 
 	calcoffsets();
 }
@@ -362,11 +364,13 @@ match(void)
 	}
 	curr = sel = matches;
 
-	if (instant && matches && matches==matchend && !lsubstr) {
+	if (instant && matches && matches==matchend && !lsubstr&& (only_first_time ? first_time : 1)) {
 		puts(matches->text);
 		cleanup();
 		exit(0);
 	}
+
+	first_time = 0;
 
 	calcoffsets();
 }
@@ -939,7 +943,7 @@ main(int argc, char *argv[])
 		} else if (!strcmp(argv[i], "-P"))   /* is the input a password */
 		        passwd = 1;
 		else if  (!strcmp(argv[i], "-n")) // instant select only match
-			instant = 1;
+			instant = !instant;
 		else if (i + 1 == argc)
 			usage();
 		/* these options take one argument */
