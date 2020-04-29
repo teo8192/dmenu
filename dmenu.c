@@ -915,7 +915,7 @@ setup(void)
 static void
 usage(void)
 {
-	fputs("usage: dmenu [-bfinPv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
+	fputs("usage: dmenu [-bfinNtTPv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
 	      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n", stderr);
 	exit(1);
 }
@@ -943,7 +943,13 @@ main(int argc, char *argv[])
 		} else if (!strcmp(argv[i], "-P"))   /* is the input a password */
 		        passwd = 1;
 		else if  (!strcmp(argv[i], "-n")) // instant select only match
-			instant = !instant;
+			instant = 1;
+		else if  (!strcmp(argv[i], "-N")) // not instant select only match
+			instant = 0;
+		else if  (!strcmp(argv[i], "-t")) // only first time 
+			only_first_time = 1, instant = 1;
+		else if  (!strcmp(argv[i], "-T")) // only first time
+			only_first_time = 0, instant = 1;
 		else if (i + 1 == argc)
 			usage();
 		/* these options take one argument */
