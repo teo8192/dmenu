@@ -48,19 +48,20 @@ is faster, but will lock up X until stdin reaches end\-of\-file.
 dmenu matches menu items case insensitively.
 .TP
 .B \-n
-dmenu instantly selects if only one match.
+dmenu instantly selects if only one match. Uses default value for first time selection. Look at the options
+.B \-t
+and
+.B \-T
 .TP
 .B \-N
 dmenu will not instantly select the only match.
 .TP
 .B \-t
-dmenu will instantly select if only one or zero elements from stdin.
-Implies 
+dmenu will instantly select if only one or zero elements from stdin. Implies 
 .B \-n
 .TP
 .B \-T
-Instantly select all the time.
-Implies
+Instantly select all the time. Implies
 .B \-n
 .TP
 .B \-P
