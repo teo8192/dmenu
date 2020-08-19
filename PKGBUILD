@@ -5,7 +5,7 @@
 pkgname='dmenu-git' # '-bzr', '-git', '-hg' or '-svn'
 pkgver=r1133.3991e5a
 pkgrel=1
-pkgdesc="A simple X terminal."
+pkgdesc="A interactive X menu."
 arch=('x86_64')
 url="https://github.com/teo8192/dmenu.git"
 license=('MIT')
